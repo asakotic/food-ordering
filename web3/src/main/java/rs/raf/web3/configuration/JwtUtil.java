@@ -1,4 +1,4 @@
-package rs.raf.web3.service;
+package rs.raf.web3.configuration;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

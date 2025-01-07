@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import rs.raf.web3.configuration.JwtUtil;
 import rs.raf.web3.model.User;
 import rs.raf.web3.model.dto.AuthLoginDto;
 import rs.raf.web3.model.dto.AuthResponse;

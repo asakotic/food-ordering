@@ -1,4 +1,4 @@
-package rs.raf.web3.service;
+package rs.raf.web3.configuration;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,11 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import rs.raf.web3.model.User;
-import rs.raf.web3.service.UserService;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
