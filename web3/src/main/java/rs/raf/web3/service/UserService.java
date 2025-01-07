@@ -1,9 +1,11 @@
 package rs.raf.web3.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import rs.raf.web3.configuration.JwtUtil;
 import rs.raf.web3.model.User;
 import rs.raf.web3.model.dto.AuthLoginDto;
@@ -29,53 +31,39 @@ public class UserService {
     }
 
     public List<User> getAllUsers(String authorization){
-        String token = authorization.substring(7);
-        Optional<User> u = userRepository.findUserByEmail(jwtUtil.extractEmail(token));
-        if(u.isEmpty()) return null;
-        else if (!u.get().getPermission().getRead()) {
-            return null;
-        }
         return userRepository.findAll();
     }
     public boolean createUser(User user,String authorization){
-        String token = authorization.substring(7);
-        Optional<User> u = userRepository.findUserByEmail(jwtUtil.extractEmail(token));
-        if(u.isEmpty()) return false;
-        else if (!u.get().getPermission().getCreate()) {
-            return false;
-        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
-    public AuthResponse updateUser(User user, String authorization){
+    public AuthResponse updateUser(User user, String authorization) {
         String token = authorization.substring(7);
-        Optional<User> u = userRepository.findUserByEmail(jwtUtil.extractEmail(token));
-        if(u.isEmpty()) return null;
-        else if (!u.get().getPermission().getUpdate()) {
-            return null;
+        String emailFromToken = jwtUtil.extractEmail(token);
+
+        User existingUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        userRepository.findUserByEmail(user.getEmail())
+                .filter(u -> !u.getId().equals(user.getId()))
+                .ifPresent(u -> {
+                    throw new ResponseStatusException(HttpStatus.CONFLICT, "Email is already in use");
+                });
+
+        if (!existingUser.getEmail().equals(emailFromToken)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not allowed to update this user");
         }
-        Optional<User> user1 = userRepository.findUserById(user.getId());
-        if(user1.isEmpty()) return null;
-        User newUser = user1.get();
-        Optional<User> tmp = userRepository.findUserByEmail(user.getEmail());
-        User us = null;
-        if(tmp.isPresent() && !user.getId().equals(tmp.get().getId()))
-            return null;
-        newUser.setEmail(user.getEmail());
-        newUser.setName(user.getName());
-        newUser.setSurname(user.getSurname());
-        newUser.setPermission(user.getPermission());
-        userRepository.save(newUser);
-        return new AuthResponse(jwtUtil.generateToken(user));
+
+        existingUser.setEmail(user.getEmail());
+        existingUser.setName(user.getName());
+        existingUser.setSurname(user.getSurname());
+        existingUser.setPermission(user.getPermission());
+
+        userRepository.save(existingUser);
+        return new AuthResponse(jwtUtil.generateToken(existingUser));
     }
     public boolean deleteUser(String email, String authorization){
-        String token = authorization.substring(7);
-        Optional<User> u = userRepository.findUserByEmail(jwtUtil.extractEmail(token));
-        if(u.isEmpty()) return false;
-        else if (!u.get().getPermission().getDelete()) {
-            return false;
-        }
         userRepository.deleteByEmail(email);
         return true;
     }
@@ -94,21 +82,9 @@ public class UserService {
     }
 
     public Optional<User> findUserById(Long id,String authorization){
-        String token = authorization.substring(7);
-        Optional<User> u = userRepository.findUserByEmail(jwtUtil.extractEmail(token));
-        if(u.isEmpty()) return null;
-        else if (!(u.get().getPermission().getUpdate() && u.get().getPermission().getUpdate())) {
-            return null;
-        }
         return userRepository.findUserById(id);
     }
     public Optional<User> findUserByEmail(String email,String authorization){
-        String token = authorization.substring(7);
-        Optional<User> u = userRepository.findUserByEmail(jwtUtil.extractEmail(token));
-        if(u.isEmpty()) return null;
-        else if (!(u.get().getPermission().getUpdate() && u.get().getPermission().getUpdate())) {
-            return null;
-        }
         return userRepository.findUserByEmail(email);
     }
 }
