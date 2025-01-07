@@ -33,33 +33,10 @@ public class User implements UserDetails {
             @AttributeOverride(name = "delete", column = @Column(name = "can_delete",nullable = false))
     })
     private Permission permission;
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -67,27 +44,4 @@ public class User implements UserDetails {
         return this.email;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPermission(Permission permission) {
-        this.permission = permission;
-    }
 }

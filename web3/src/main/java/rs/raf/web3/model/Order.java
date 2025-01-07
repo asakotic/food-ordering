@@ -1,11 +1,13 @@
 package rs.raf.web3.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 @Entity
+@Data
 @Table(name = "orders")
 public class Order {
     @Id
@@ -16,17 +18,11 @@ public class Order {
     private User userId;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private double price;
-
-    @Column(nullable = false)
     private Status status = Status.SCHEDULED;
 
     @Column(nullable = false)
-    private Date created_at;
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private Boolean active;
+    private Boolean active = true;
 }
