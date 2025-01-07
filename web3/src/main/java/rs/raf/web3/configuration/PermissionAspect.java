@@ -43,13 +43,17 @@ public class PermissionAspect {
             throw new AccessDeniedException("User not found");
         }
 
-        // Check if the user has the required permission
         User user = userOptional.get();
         boolean hasPermission = switch (requiredPermission) {
             case "create" -> user.getPermission().getCreate();
             case "delete" -> user.getPermission().getDelete();
             case "read" -> user.getPermission().getRead();
             case "update" -> user.getPermission().getUpdate();
+            case "search" -> user.getPermission().getSearch();
+            case "order" -> user.getPermission().getOrder();
+            case "cancel" -> user.getPermission().getCancel();
+            case "track" -> user.getPermission().getTrack();
+            case "schedule" -> user.getPermission().getSchedule();
             default -> false;
         };
 

@@ -12,6 +12,12 @@ public class Permission {
     private Boolean update;
     private Boolean delete;
 
+    private Boolean search;
+    private Boolean order;
+    private Boolean cancel;
+    private Boolean track;
+    private Boolean schedule;
+
     public Boolean getCreate() {
         return create;
     }
@@ -28,19 +34,23 @@ public class Permission {
         return delete;
     }
 
-    public void setCreate(Boolean create) {
-        this.create = create;
+    public Boolean getSearch() {
+        return search;
     }
 
-    public void setRead(Boolean read) {
-        this.read = read;
+    public Boolean getOrder() {
+        return order;
     }
 
-    public void setUpdate(Boolean update) {
-        this.update = update;
+    public Boolean getCancel() {
+        return cancel;
     }
 
-    public void setDelete(Boolean delete) {
-        this.delete = delete;
+    public Boolean getTrack() {
+        return track;
+    }
+
+    public Boolean getSchedule() {
+        return schedule;
     }
 }

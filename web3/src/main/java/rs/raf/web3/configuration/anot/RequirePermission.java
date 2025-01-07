@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
-@Target(ElementType.METHOD) // Can only be used on methods
-@Retention(RetentionPolicy.RUNTIME) // Retain this annotation at runtime
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface RequirePermission {
-    String value(); // Permission type (e.g., "create", "delete", etc.)
+    String value();
 }
 
