@@ -1,0 +1,55 @@
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Izmena korisnika</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" class="form-control" formControlName="name"
+                        placeholder="Enter first name" />
+                    <div *ngIf="f['name'].touched && f['name'].invalid" class="text-danger">
+                        Name is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="surname" class="form-label">Last Name</label>
+                    <input type="text" id="surname" class="form-control" formControlName="surname"
+                        placeholder="Enter last name" />
+                    <div *ngIf="f['surname'].touched && f['surname'].invalid" class="text-danger">Last name is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email"
+                        placeholder="Enter email" />
+                    <div *ngIf="f['email'].touched && f['email'].invalid" class="text-danger">
+                        <span *ngIf="f['email'].errors?.['required']">Email is required.</span>
+                        <span *ngIf="f['email'].errors?.['email']">Invalid email format.</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Permissions</label>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="read" formControlName="read" />
+                        <label for="read" class="form-check-label">Can Read</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="create" formControlName="create" />
+                        <label for="create" class="form-check-label">Can Create</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="update" formControlName="update" />
+                        <label for="update" class="form-check-label">Can Update</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="delete" formControlName="delete" />
+                        <label for="delete" class="form-check-label">Can Delete</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Add User</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+PUT http://localhost:8080/users/update
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoiYW5hIiwiY2FuX2RlbGV0ZSI6dHJ1ZSwiZXhwIjoxNzM0MjM0ODYwLCJpYXQiOjE3MzQxOTg4NjAsImVtYWlsIjoiYW5hIiwiY2FuX3VwZGF0ZSI6dHJ1ZX0.Wiw6PM3sKw611vacYbVzvlelzGOxFQKimhj9wqEZslM
+
+{
+  "email": "ana",
+}
+
+###
+PUT http://localhost:8080/users/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoiYW5hIiwiY2FuX2RlbGV0ZSI6dHJ1ZSwiZXhwIjoxNzM0MzE4ODczLCJpYXQiOjE3MzQyODI4NzMsImVtYWlsIjoiYW5hIiwiY2FuX3VwZGF0ZSI6dHJ1ZX0.AiQklx0m25VDTk-csoLemwYh3-QvFpu5_3Gsoob3wgg
+
+{
+  "email": "ana@gmail.com",
+  "name": "ana",
+  "surname": "anaa",
+  "permission": {
+    "read": true,
+    "update": true,
+    "delete": true,
+    "create": true
+  }
+}
+
+###
+GET http://localhost:8080/all
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoiYW5hIiwiY2FuX2RlbGV0ZSI6dHJ1ZSwiZXhwIjoxNzM0MjM0ODYwLCJpYXQiOjE3MzQxOTg4NjAsImVtYWlsIjoiYW5hIiwiY2FuX3VwZGF0ZSI6dHJ1ZX0.Wiw6PM3sKw611vacYbVzvlelzGOxFQKimhj9wqEZslM
+
+
+###
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "email": "ana",
+  "password": "ana"
+}
+
+
