@@ -42,4 +42,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
             @Param("newStatus") Status newStatus,
             @Param("time") LocalDateTime time
     );
+    @Modifying
+    @Query("UPDATE Order o SET o.active = false WHERE o.status = :status AND o.active = true")
+    void deactivateOrdersByStatus(@Param("status") Status status);
 }

@@ -36,5 +36,16 @@ public class StatusUpdate {
                 Status.DELIVERED,
                 now.minusSeconds(20)
         );
+        orderRepository.deactivateOrdersByStatus(Status.DELIVERED);
+    }
+
+    @Scheduled(fixedRate = 60000) //minutic
+    public void scheduleOrderStatusUpdates() {
+        LocalDateTime now = LocalDateTime.now();
+        orderRepository.updateOrdersByStatusAndTime(
+                Status.SCHEDULED,
+                Status.ORDERED,
+                now
+        );
     }
 }

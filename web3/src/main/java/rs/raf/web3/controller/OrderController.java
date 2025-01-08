@@ -32,6 +32,18 @@ public class OrderController {
         //
         // return ResponseEntity.status(HttpStatus.CREATED).body("Order created successfully");
     }
+    @PostMapping("/schedule")
+    @RequirePermission("schedule")
+    public ResponseEntity<String> scheduleOrder(@RequestBody Order order, @RequestHeader("Authorization") String authorization) {
+        //try {
+        orderService.scheduleOrder(order, authorization);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Order scheduled successfully");
+        //} catch (OrderLimitExceededException e) {
+        //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        // }*/
+        //
+        // return ResponseEntity.status(HttpStatus.CREATED).body("Order created successfully");
+    }
 
     @GetMapping("/search")
     @RequirePermission("search")
