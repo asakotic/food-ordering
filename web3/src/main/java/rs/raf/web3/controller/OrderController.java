@@ -54,10 +54,9 @@ public class OrderController {
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String dateFrom,
             @RequestParam(required = false) String dateTo,
-            @RequestParam(required = false) Long userId,
             @RequestHeader("Authorization") String authorization) {
 
-        List<Order> orders = orderService.searchOrders(status, dateFrom, dateTo, userId, authorization);
+        List<Order> orders = orderService.searchOrders(status, dateFrom, dateTo, authorization);
         return ResponseEntity.ok(orders);
     }
     @PutMapping("/orders/cancel/{id}")

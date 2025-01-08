@@ -9,4 +9,20 @@ import java.util.List;
 public class ScheduleOrderRequest {
     private LocalDateTime scheduledTime;
     private List<DishOrderDto> dishOrderDtos;
+
+    public LocalDateTime getScheduledTime() {
+        return scheduledTime;
+    }
+
+    public void setScheduledTime(LocalDateTime scheduledTime) {
+        this.scheduledTime = scheduledTime;
+    }
+
+    public List<DishOrderDto> getDishOrderDtos() {
+        return dishOrderDtos;
+    }
+
+    public void setDishOrderDtos(List<DishOrderDto> dishOrderDtos) {
+        this.dishOrderDtos = dishOrderDtos;
+    }
 }

@@ -46,7 +46,7 @@ public class OrderService {
                     .orElseThrow(() -> new EntityNotFoundException("Dish not found with ID: " + dto.getDishId()));
             order.addDish(dish, dto.getQuantity());
         }
-        order.setUserId(user);
+        order.setUser(user);
         order.setStatus(Status.ORDERED);
         order.setCreatedAt(LocalDateTime.now());
         orderRepository.save(order);
@@ -60,7 +60,7 @@ public class OrderService {
         Order order = new Order();
         order.setStatus(Status.SCHEDULED);
         order.setCreatedAt(scheduledTime);
-        order.setUserId(user);
+        order.setUser(user);
 
         for (DishOrderDto dto : dishOrderDtos) {
             Dish dish = dishRepository.findById(dto.getDishId())
@@ -70,7 +70,7 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public List<Order> searchOrders(String status, String dateFrom, String dateTo, Long userId, String authorization) {
+    public List<Order> searchOrders(String status, String dateFrom, String dateTo, String authorization) {
         String email = jwtUtil.extractEmail(authorization.substring(7)); // Extract email from JWT
         User requestingUser = userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -79,7 +79,7 @@ public class OrderService {
         if (isAdmin) {
             return orderRepository.searchAdvanced(status,LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo), null);
         }
-        return orderRepository.searchAdvanced(status, LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo), requestingUser);
+        return orderRepository.searchAdvanced(status, LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo), requestingUser.getId());
     }
 
     public void cancelOrder(Long id, String authorization) {

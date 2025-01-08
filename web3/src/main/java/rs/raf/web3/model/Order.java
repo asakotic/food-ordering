@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Ord")
 @Data
 @Table(name = "orders")
 public class Order {
@@ -16,7 +16,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @Column(nullable = false)
     private Status status = Status.SCHEDULED;
@@ -41,4 +41,45 @@ public class Order {
     public void removeDish(Dish dish) {
         orderDishes.removeIf(od -> od.getDish().equals(dish));
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User userId) {
+        this.user = userId;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
 }

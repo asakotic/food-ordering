@@ -42,8 +42,4 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
-
-    public boolean validateToken(String token, UserDetails user) {
-        return (user.getUsername().equals(extractEmail(token)) && !isTokenExpired(token));
-    }
 }

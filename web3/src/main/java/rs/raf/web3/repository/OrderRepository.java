@@ -18,22 +18,22 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     int countByUserAndStatusIn(User user, List<Status> statuses);
 
         @Query("""
-        SELECT o FROM Order o
+        SELECT o FROM Ord o
         WHERE (:status IS NULL OR o.status = :status)
         AND (:dateFrom IS NULL OR o.createdAt >= :dateFrom)
         AND (:dateTo IS NULL OR o.createdAt <= :dateTo)
-        AND (:userId IS NULL OR o.userId.id = :userId)
+        AND (:userId IS NULL OR o.user.id = :userId)
     """)
         List<Order> searchAdvanced(
                 @Param("status") String status,
                 @Param("dateFrom") LocalDateTime dateFrom,
                 @Param("dateTo") LocalDateTime dateTo,
-                @Param("userId") User userId);
+                @Param("userId") Long userId);
 
     @Transactional
     @Modifying
     @Query("""
-        UPDATE Order o
+        UPDATE Ord o
         SET o.status = :newStatus, o.createdAt = CURRENT_TIMESTAMP
         WHERE o.status = :currentStatus AND o.createdAt <= :time
     """)
@@ -43,6 +43,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
             @Param("time") LocalDateTime time
     );
     @Modifying
-    @Query("UPDATE Order o SET o.active = false WHERE o.status = :status AND o.active = true")
+    @Query("UPDATE Ord o SET o.active = false WHERE o.status = :status AND o.active = true")
     void deactivateOrdersByStatus(@Param("status") Status status);
 }
