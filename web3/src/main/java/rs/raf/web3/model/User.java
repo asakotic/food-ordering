@@ -33,6 +33,7 @@ public class User implements UserDetails {
             @AttributeOverride(name = "delete", column = @Column(name = "can_delete",nullable = false))
     })
     private Permission permission;
+    private Boolean admin = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

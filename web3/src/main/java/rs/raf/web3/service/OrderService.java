@@ -40,4 +40,25 @@ public class OrderService {
         order.setCreatedAt(LocalDateTime.now());
         orderRepository.save(order);
     }
+    public List<Order> searchOrders(String status, String dateFrom, String dateTo, Long userId, String authorization) {
+        String email = jwtUtil.extractEmail(authorization.substring(7)); // Extract email from JWT
+        User requestingUser = userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        boolean isAdmin = requestingUser.getAdmin();
+        if (isAdmin) {
+            return orderRepository.searchAdvanced(status,LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo), null);
+        }
+        return orderRepository.searchAdvanced(status, LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo), requestingUser);
+    }
+    public void cancelOrder(Long id, String authorization) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        if (!order.getStatus().equals(Status.ORDERED)) {
+            throw new IllegalStateException("Orders can only be cancelled if they are in the ORDERED status.");
+        }
+        order.setStatus(Status.CANCELED);
+        orderRepository.save(order);
+    }
 }
