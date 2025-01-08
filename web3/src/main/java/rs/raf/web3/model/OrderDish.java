@@ -16,5 +16,5 @@ public class OrderDish {
     @JoinColumn(name = "dish_id")
     private Dish dish;
     @Column(nullable = false)
-    public int quantity;
+    private int quantity;
 }

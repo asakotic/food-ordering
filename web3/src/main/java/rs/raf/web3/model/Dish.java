@@ -1,18 +1,21 @@
 package rs.raf.web3.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "dishes")
 public class Dish {
     @Id
-    public Long id;
+    private Long id;
     @Column(nullable = false)
-    public String name;
+    private String name;
     @Column(nullable = false)
-    public int price;
+    private int price;
+
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderDish> orderDishes = new HashSet<>();
 
 }
