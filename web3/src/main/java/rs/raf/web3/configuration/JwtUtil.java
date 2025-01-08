@@ -35,6 +35,13 @@ public class JwtUtil {
         claims.put("can_update",user.getPermission().getUpdate());
         claims.put("can_create",user.getPermission().getCreate());
         claims.put("can_delete",user.getPermission().getDelete());
+
+        claims.put("can_search",user.getPermission().getSearch());
+        claims.put("can_order",user.getPermission().getOrder());
+        claims.put("can_cancel",user.getPermission().getCancel());
+        claims.put("can_track",user.getPermission().getTrack());
+        claims.put("can_schedule",user.getPermission().getSchedule());
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getEmail())

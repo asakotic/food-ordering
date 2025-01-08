@@ -61,10 +61,15 @@ export class UserListComponent implements OnInit {
 
   formatPermissions(user: any): string {
     const permissions = [];
-    if (user.can_read_users) permissions.push('Read');
-    if (user.can_create_users) permissions.push('Create');
-    if (user.can_update_users) permissions.push('Update');
-    if (user.can_delete_users) permissions.push('Delete');
+    if (user.permission.read) permissions.push('Read');
+    if (user.permission.create) permissions.push('Create');
+    if (user.permission.update) permissions.push('Update');
+    if (user.permission.delete) permissions.push('Delete');
+    if (user.permission.search) permissions.push('Search');
+    if (user.permission.order) permissions.push('Order');
+    if (user.permission.cancel) permissions.push('Cancel');
+    if (user.permission.track) permissions.push('Track');
+     if (user.permission.schedule) permissions.push('Schedule');
     return permissions.join(', ');
   }
 

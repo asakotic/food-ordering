@@ -7,20 +7,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0Z
 }
 
 ###
-PUT http://localhost:8080/users/update
+POST http://localhost:8080/users/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoiYW5hIiwiY2FuX2RlbGV0ZSI6dHJ1ZSwiZXhwIjoxNzM0MzE4ODczLCJpYXQiOjE3MzQyODI4NzMsImVtYWlsIjoiYW5hIiwiY2FuX3VwZGF0ZSI6dHJ1ZX0.AiQklx0m25VDTk-csoLemwYh3-QvFpu5_3Gsoob3wgg
+//Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoiYW5hIiwiY2FuX2RlbGV0ZSI6dHJ1ZSwiZXhwIjoxNzM0MzE4ODczLCJpYXQiOjE3MzQyODI4NzMsImVtYWlsIjoiYW5hIiwiY2FuX3VwZGF0ZSI6dHJ1ZX0.AiQklx0m25VDTk-csoLemwYh3-QvFpu5_3Gsoob3wgg
 
 {
   "email": "ana@gmail.com",
+  "password": "ana",
   "name": "ana",
   "surname": "anaa",
   "permission": {
     "read": true,
     "update": true,
     "delete": true,
-    "create": true
-  }
+    "create": true,
+    "cancel": true,
+    "schedule": true,
+    "order": true,
+    "search": true,
+    "track": true
+  },
+  "admin": true
 }
 
 ###

@@ -33,6 +33,7 @@ public class User implements UserDetails {
             @AttributeOverride(name = "order", column = @Column(name = "can_order",nullable = false)),
     })
     private Permission permission;
+    @Column(nullable = false)
     private Boolean admin = false;
 
     @Override

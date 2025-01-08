@@ -25,6 +25,11 @@ export class UpdateUserComponent implements OnInit {
               create: [false],
               update: [false],
               delete: [false],
+              search: [false],
+              order: [false],
+              cancel: [false],
+              track: [false],
+              schedule: [false],
             },
             )
         }

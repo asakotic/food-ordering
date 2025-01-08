@@ -57,6 +57,27 @@
                         <input type="checkbox" class="form-check-input" id="delete" formControlName="delete" />
                         <label for="delete" class="form-check-label">Can Delete</label>
                     </div>
+
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="search" formControlName="search" />
+                        <label for="search" class="form-check-label">Can Search</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="order" formControlName="order" />
+                        <label for="order" class="form-check-label">Can Order</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="cancel" formControlName="cancel" />
+                        <label for="cancel" class="form-check-label">Can Cancel</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="schedule" formControlName="schedule" />
+                        <label for="schedule" class="form-check-label">Can Schedule</label>
+                    </div>
+                    <div class="form-check" formGroupName="permission">
+                        <input type="checkbox" class="form-check-input" id="track" formControlName="track" />
+                        <label for="track" class="form-check-label">Can Track</label>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Add User</button>
             </form>

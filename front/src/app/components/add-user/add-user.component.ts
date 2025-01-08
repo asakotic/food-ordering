@@ -23,6 +23,11 @@ export class AddUserComponent {
               create: [false],
               update: [false],
               delete: [false],
+              search: [false],
+              order: [false],
+              cancel: [false],
+              track: [false],
+              schedule: [false],
             },
             )
         }

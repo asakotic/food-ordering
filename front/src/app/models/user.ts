@@ -9,5 +9,11 @@ export type User = {
         update:boolean,
         delete:boolean,
         read:boolean,
+
+        search:boolean,
+        order:boolean,
+        cancel:boolean,
+        track:boolean,
+        schedule:boolean,
     }
 }
