@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.raf.web3.configuration.anot.RequirePermission;
 import rs.raf.web3.model.Order;
+import rs.raf.web3.model.dto.DishOrderDto;
+import rs.raf.web3.model.dto.ScheduleOrderRequest;
 import rs.raf.web3.service.OrderService;
 
 import java.util.List;
@@ -22,9 +24,9 @@ public class OrderController {
 
     @PostMapping("/create")
     @RequirePermission("order")
-    public ResponseEntity<String> createOrder(@RequestBody Order order, @RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<String> createOrder(@RequestBody List<DishOrderDto> dto, @RequestHeader("Authorization") String authorization) {
         //try {
-            orderService.createOrder(order, authorization);
+            orderService.createOrder(dto, authorization);
             return ResponseEntity.status(HttpStatus.CREATED).body("Order created successfully");
         //} catch (OrderLimitExceededException e) {
           //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -34,10 +36,11 @@ public class OrderController {
     }
     @PostMapping("/schedule")
     @RequirePermission("schedule")
-    public ResponseEntity<String> scheduleOrder(@RequestBody Order order, @RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<String> scheduleOrder(@RequestBody ScheduleOrderRequest request,
+                                                @RequestHeader("Authorization") String authorization) {
         //try {
-        orderService.scheduleOrder(order, authorization);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Order scheduled successfully");
+        orderService.scheduleOrder(request.getScheduledTime(), request.getDishOrderDtos(), authorization);
+        return ResponseEntity.ok("Order scheduled successfully.");
         //} catch (OrderLimitExceededException e) {
         //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         // }*/
