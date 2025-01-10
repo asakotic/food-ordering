@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Create New Order</h2>
+    <div class="form-group">
+        <label for="scheduledTime">Schedule Time (optional):</label>
+        <input type="datetime-local" id="scheduledTime" class="form-control" [(ngModel)]="scheduledTime" />
+    </div>
+
+    <div *ngFor="let dish of dishes" class="meal-item mb-3">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <h5>{{ dish.name }}</h5>
+                <p>Price:{{ dish.price }}</p>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <button type="button" class="btn btn-danger" (click)="decrementQuantity(dish.dishId)">
+                    -
+                </button>
+                <span class="mx-3">{{ quantities[dish.dishId    ] }}</span>
+                <button type="button" class="btn btn-success" (click)="incrementQuantity(dish.dishId)">
+                    +
+                </button>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <button type="button" class="btn btn-primary mt-3" (click)="placeOrder()" [disabled]="!isOrderValid()">
+        Place Order
+    </button>
+</div>

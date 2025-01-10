@@ -2,6 +2,8 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a [routerLink]="'/user-list'" class="btn btn-outline-secondary navbar-brand" aria-current="page">Home</a>
+      <a [routerLink]="'/order-list'" class="btn btn-outline-secondary navbar-brand" aria-current="page">Orders</a>
+      <a [routerLink]="'/create-order'" class="btn btn-outline-secondary navbar-brand" aria-current="page">New Order</a>
       <a [routerLink]="'/'" class="btn btn-outline-secondary navbar-brand" aria-current="page" (click)='logout()'>LogOut</a>
       <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
         <div class="navbar-nav">

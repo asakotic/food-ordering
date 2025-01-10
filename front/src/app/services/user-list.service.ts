@@ -99,6 +99,13 @@ export class UserListService {
         });
     }
   }
+  checkAdminStatus(): any {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      return decodedToken?.isAdmin === true; 
+    }
+  }
 
   
 
