@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     UserListComponent,
     AddUserComponent,
     UpdateUserComponent,
+    OrderListComponent,
+    CreateOrderComponent,
   ],
   imports: [
     BrowserModule,

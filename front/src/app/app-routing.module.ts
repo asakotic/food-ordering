@@ -5,6 +5,8 @@ import { LoginComponent } from './components/login/login.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 const routes: Routes = [
   {
@@ -25,7 +27,18 @@ const routes: Routes = [
     path: "update-user/:id",
     component: UpdateUserComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: "order-list",
+    component: OrderListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "create-order",
+    component: CreateOrderComponent,
+    canActivate: [AuthGuard]
+  },
+  
 ];
 
 @NgModule({
