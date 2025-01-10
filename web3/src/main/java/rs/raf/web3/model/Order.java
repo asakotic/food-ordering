@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -82,4 +83,11 @@ public class Order {
         this.active = active;
     }
 
+    public Set<OrderDish> getOrderDishes() {
+        return orderDishes;
+    }
+
+    public void setOrderDishes(Set<OrderDish> orderDishes) {
+        this.orderDishes = orderDishes;
+    }
 }

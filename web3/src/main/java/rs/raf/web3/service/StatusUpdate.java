@@ -15,7 +15,7 @@ public class StatusUpdate {
         this.orderRepository = orderRepository;
     }
 
-    @Scheduled(fixedRate = 5000) // 5 sekundi
+   // @Scheduled(fixedRate = 5000) // 5 sekundi
     public void processOrderStatusUpdates() {
         LocalDateTime now = LocalDateTime.now();
 
@@ -39,7 +39,7 @@ public class StatusUpdate {
         orderRepository.deactivateOrdersByStatus(Status.DELIVERED);
     }
 
-    @Scheduled(fixedRate = 60000) //minutic
+  //  @Scheduled(fixedRate = 60000) //minutic
     public void scheduleOrderStatusUpdates() {
         LocalDateTime now = LocalDateTime.now();
         orderRepository.updateOrdersByStatusAndTime(

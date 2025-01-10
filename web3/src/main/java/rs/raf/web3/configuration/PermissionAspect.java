@@ -44,18 +44,39 @@ public class PermissionAspect {
         }
 
         User user = userOptional.get();
-        boolean hasPermission = switch (requiredPermission) {
-            case "create" -> user.getPermission().getCreate();
-            case "delete" -> user.getPermission().getDelete();
-            case "read" -> user.getPermission().getRead();
-            case "update" -> user.getPermission().getUpdate();
-            case "search" -> user.getPermission().getSearch();
-            case "order" -> user.getPermission().getOrder();
-            case "cancel" -> user.getPermission().getCancel();
-            case "track" -> user.getPermission().getTrack();
-            case "schedule" -> user.getPermission().getSchedule();
-            default -> false;
-        };
+        boolean hasPermission;
+        switch (requiredPermission) {
+            case "create":
+                hasPermission = user.getPermission().getCreate();
+                break;
+            case "delete":
+                hasPermission = user.getPermission().getDelete();
+                break;
+            case "read":
+                hasPermission = user.getPermission().getRead();
+                break;
+            case "update":
+                hasPermission = user.getPermission().getUpdate();
+                break;
+            case "search":
+                hasPermission = user.getPermission().getSearch();
+                break;
+            case "order":
+                hasPermission = user.getPermission().getOrder();
+                break;
+            case "cancel":
+                hasPermission = user.getPermission().getCancel();
+                break;
+            case "track":
+                hasPermission = user.getPermission().getTrack();
+                break;
+            case "schedule":
+                hasPermission = user.getPermission().getSchedule();
+                break;
+            default:
+                hasPermission = false;
+                break;
+        }
 
         if (!hasPermission) {
             throw new AccessDeniedException("Permission denied");

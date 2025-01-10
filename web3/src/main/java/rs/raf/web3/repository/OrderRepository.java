@@ -25,7 +25,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
         AND (:userId IS NULL OR o.user.id = :userId)
     """)
         List<Order> searchAdvanced(
-                @Param("status") String status,
+                @Param("status") Status status,
                 @Param("dateFrom") LocalDateTime dateFrom,
                 @Param("dateTo") LocalDateTime dateTo,
                 @Param("userId") Long userId);
@@ -42,6 +42,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
             @Param("newStatus") Status newStatus,
             @Param("time") LocalDateTime time
     );
+    @Transactional
     @Modifying
     @Query("UPDATE Ord o SET o.active = false WHERE o.status = :status AND o.active = true")
     void deactivateOrdersByStatus(@Param("status") Status status);

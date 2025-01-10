@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class ScheduleOrderRequest {
     private LocalDateTime scheduledTime;
-    private List<DishOrderDto> dishOrderDtos;
+    private List<CreateOrderDto> dishOrderDtos;
 
     public LocalDateTime getScheduledTime() {
         return scheduledTime;
@@ -18,11 +18,11 @@ public class ScheduleOrderRequest {
         this.scheduledTime = scheduledTime;
     }
 
-    public List<DishOrderDto> getDishOrderDtos() {
+    public List<CreateOrderDto> getDishOrderDtos() {
         return dishOrderDtos;
     }
 
-    public void setDishOrderDtos(List<DishOrderDto> dishOrderDtos) {
+    public void setDishOrderDtos(List<CreateOrderDto> dishOrderDtos) {
         this.dishOrderDtos = dishOrderDtos;
     }
 }

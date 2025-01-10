@@ -1,19 +1,15 @@
 package rs.raf.web3.model.dto;
 
-import lombok.Data;
-import rs.raf.web3.model.Dish;
-
-@Data
-public class DishOrderDto {
-    private Dish dish;
+public class CreateOrderDto {
+    private Long dishId;
     private int quantity;
 
-    public Dish getDish() {
-        return dish;
+    public Long getDishId() {
+        return dishId;
     }
 
-    public void setDish(Dish dish) {
-        this.dish = dish;
+    public void setDishId(Long dishId) {
+        this.dishId = dishId;
     }
 
     public int getQuantity() {

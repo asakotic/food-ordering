@@ -1,3 +1,11 @@
+GET http://localhost:8080/orders/search?dateFrom=2025-01-01&dateTo=2025-01-10
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fY3JlYXRlIjp0cnVlLCJzdWIiOiJhbmFAZ21haWwuY29tIiwiY2FuX2NhbmNlbCI6dHJ1ZSwiY2FuX3JlYWQiOnRydWUsImNhbl9zY2hlZHVsZSI6dHJ1ZSwiY2FuX2RlbGV0ZSI6dHJ1ZSwiY2FuX3RyYWNrIjp0cnVlLCJjYW5fc2VhcmNoIjp0cnVlLCJjYW5fb3JkZXIiOnRydWUsImV4cCI6MTczNjQ3Njc0NCwiaWF0IjoxNzM2NDQwNzQ0LCJlbWFpbCI6ImFuYUBnbWFpbC5jb20iLCJjYW5fdXBkYXRlIjp0cnVlfQ.d1bWKSLdQTrf6F18ZEL8ww8YPYSbIwCATLd9OIRYltY
+
+###
+
+
+###
 PUT http://localhost:8080/users/update
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYW5fcmVhZCI6dHJ1ZSwiY2FuX2NyZWF0ZSI6dHJ1ZSwic3ViIjoiYW5hIiwiY2FuX2RlbGV0ZSI6dHJ1ZSwiZXhwIjoxNzM0MjM0ODYwLCJpYXQiOjE3MzQxOTg4NjAsImVtYWlsIjoiYW5hIiwiY2FuX3VwZGF0ZSI6dHJ1ZX0.Wiw6PM3sKw611vacYbVzvlelzGOxFQKimhj9wqEZslM
@@ -41,8 +49,9 @@ POST http://localhost:8080/users/login
 Content-Type: application/json
 
 {
-  "email": "ana",
+  "email": "ana@gmail.com",
   "password": "ana"
 }
+
 
 

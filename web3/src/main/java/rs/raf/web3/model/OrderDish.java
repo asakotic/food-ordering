@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class OrderDish {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "order_id")

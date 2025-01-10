@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.raf.web3.configuration.anot.RequirePermission;
+import rs.raf.web3.model.Dish;
 import rs.raf.web3.model.Order;
-import rs.raf.web3.model.dto.DishOrderDto;
-import rs.raf.web3.model.dto.ScheduleOrderRequest;
+import rs.raf.web3.model.dto.*;
 import rs.raf.web3.service.OrderService;
 
 import java.util.List;
@@ -24,7 +24,8 @@ public class OrderController {
 
     @PostMapping("/create")
     @RequirePermission("order")
-    public ResponseEntity<String> createOrder(@RequestBody List<DishOrderDto> dto, @RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<String> createOrder(@RequestBody List<CreateOrderDto> dto, @RequestHeader("Authorization") String authorization) {
+        System.out.println(dto);
         //try {
             orderService.createOrder(dto, authorization);
             return ResponseEntity.status(HttpStatus.CREATED).body("Order created successfully");
@@ -50,13 +51,14 @@ public class OrderController {
 
     @GetMapping("/search")
     @RequirePermission("search")
-    public ResponseEntity<List<Order>> searchOrders(
+    public ResponseEntity<List<OrderDto>> searchOrders(
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String dateFrom,
             @RequestParam(required = false) String dateTo,
+            @RequestParam(required = false) Long userId,
             @RequestHeader("Authorization") String authorization) {
 
-        List<Order> orders = orderService.searchOrders(status, dateFrom, dateTo, authorization);
+        List<OrderDto> orders = orderService.searchOrders(status, dateFrom, dateTo,userId, authorization);
         return ResponseEntity.ok(orders);
     }
     @PutMapping("/orders/cancel/{id}")
@@ -68,6 +70,13 @@ public class OrderController {
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/dishes")
+    @RequirePermission("order")
+    public ResponseEntity<List<DishDto>> getDishes(@RequestHeader("Authorization") String authorization){
+        List<DishDto> dishes = orderService.getDishes();
+        return ResponseEntity.ok(dishes);
     }
 
 }

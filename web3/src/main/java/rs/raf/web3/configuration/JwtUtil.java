@@ -41,6 +41,7 @@ public class JwtUtil {
         claims.put("can_cancel",user.getPermission().getCancel());
         claims.put("can_track",user.getPermission().getTrack());
         claims.put("can_schedule",user.getPermission().getSchedule());
+        claims.put("isAdmin", user.getAdmin());
 
         return Jwts.builder()
                 .setClaims(claims)

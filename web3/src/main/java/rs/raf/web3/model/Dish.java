@@ -9,14 +9,12 @@ import java.util.Set;
 @Table(name = "dishes")
 public class Dish {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private int price;
-
-    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDish> orderDishes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -42,11 +40,4 @@ public class Dish {
         this.price = price;
     }
 
-    public Set<OrderDish> getOrderDishes() {
-        return orderDishes;
-    }
-
-    public void setOrderDishes(Set<OrderDish> orderDishes) {
-        this.orderDishes = orderDishes;
-    }
 }
