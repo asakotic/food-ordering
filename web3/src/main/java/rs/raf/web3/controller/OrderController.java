@@ -61,7 +61,7 @@ public class OrderController {
         List<OrderDto> orders = orderService.searchOrders(status, dateFrom, dateTo,userId, authorization);
         return ResponseEntity.ok(orders);
     }
-    @PutMapping("/orders/cancel/{id}")
+    @DeleteMapping("/cancel/{id}")
     @RequirePermission("cancel")
     public ResponseEntity<String> cancelOrder(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
         try {

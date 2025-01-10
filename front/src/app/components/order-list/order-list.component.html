@@ -35,6 +35,7 @@
                     <th scope="col">Created by</th>
                     <th scope="col">Updated at</th>
                     <th scope="col">Items</th>
+                    <th scope="col">Actions</th> 
                 </tr>
             </thead>
             <tbody>
@@ -48,8 +49,13 @@
                             <li *ngFor="let dish of order.dishes">{{ dish.name }} ({{ dish.quantity }})</li>
                         </ul>
                     </td>
+                    <td>
+                        <button *ngIf="order.status !== 'CANCELED'" (click)="cancelOrder(order.id)"
+                            class="btn btn-danger btn-sm">
+                            Cancel
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-</div>

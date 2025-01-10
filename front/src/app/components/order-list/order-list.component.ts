@@ -11,12 +11,12 @@ import { UserListService } from 'src/app/services/user-list.service';
 export class OrderListComponent implements OnInit {
   orders: Orderer[] = [];
   searchForm: FormGroup;
-  token = localStorage.getItem('jwt') || ""; 
+  token = localStorage.getItem('jwt') || "";
   statuses = ['ORDERED', 'PREPARING', 'IN_DELIVERY', 'DELIVERED', 'CANCELED'];
   private intervalId: any;
-  isAdmin: boolean = false; 
+  isAdmin: boolean = false;
 
-  constructor(private orderService: OrderService, private fb: FormBuilder,private userService: UserListService) {
+  constructor(private orderService: OrderService, private fb: FormBuilder, private userService: UserListService) {
     this.searchForm = this.fb.group({
       status: [''],
       dateFrom: [''],
@@ -26,7 +26,7 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAllOrders(); 
+    this.loadAllOrders();
   }
 
   loadAllOrders(): void {
@@ -54,11 +54,22 @@ export class OrderListComponent implements OnInit {
   }
   startAutoSearch(): void {
     this.intervalId = setInterval(() => {
-      this.onSearch(); 
+      this.onSearch();
     }, 5000); // svakih 5 sekundi
   }
   checkAdminStatus(): void {
-    this.isAdmin =  this.userService.checkAdminStatus()
+    this.isAdmin = this.userService.checkAdminStatus()
+  }
+  cancelOrder(orderId: number): void {
+    this.orderService.cancelOrder(orderId, this.token).subscribe(
+      () => {
+        alert('Order has been canceled successfully.');
+        this.loadAllOrders();
+      },
+      (error) => {
+        alert('Failed to cancel the order: ' + error);
+      }
+    );
   }
 
 }

@@ -33,4 +33,8 @@ export class OrderService {
 
     return this.http.get<Orderer[]>(`${this.apiUrl}/search`, { headers, params });
   }
+  cancelOrder(orderId: number, token: string): Observable<void> {
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.delete<void>(this.apiUrl+`/cancel/${orderId}`, { headers });
+  }
 }
