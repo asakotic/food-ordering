@@ -3,20 +3,28 @@ package rs.raf.web3.model;
 import jakarta.persistence.*;
 
 import java.security.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class ErrorMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private Long orderId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(nullable = false)
     private String message;
     @Column(nullable = false)
-    private Timestamp timestamp;
-    @Column(nullable = false)
-    private String description;
+    private LocalDateTime timestamp;
+
+    public ErrorMessage() {}
+
+    public ErrorMessage(User user, String message, LocalDateTime timestamp) {
+        this.user = user;
+        this.message = message;
+        this.timestamp = timestamp;
+    }
 
     public Long getId() {
         return id;
@@ -26,12 +34,12 @@ public class ErrorMessage {
         this.id = id;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public User getUser() {
+        return user;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getMessage() {
@@ -42,19 +50,11 @@ public class ErrorMessage {
         this.message = message;
     }
 
-    public Timestamp getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

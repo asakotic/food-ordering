@@ -37,7 +37,7 @@ public class OrderService {
 
         int activeOrders = orderRepository.countByUserAndStatusIn(user, List.of(Status.ORDERED, Status.PREPARING, Status.IN_DELIVERY));
         if (activeOrders >= 3) {
-          //  throw new OrderLimitExceededException("You cannot have more than 3 active orders.");
+            throw new RuntimeException("User cannot have more than 3 active orders.");
         }
         Order order = new Order();
         for (CreateOrderDto dto : dishOrderDtos) {
@@ -81,24 +81,6 @@ public class OrderService {
 
         orderRepository.save(order);
     }
-
-//    public void scheduleOrder(LocalDateTime scheduledTime, List<CreateOrderDto> dishOrderDtos, String authorization) {
-//        String email = jwtUtil.extractEmail(authorization.substring(7));
-//        User user = userRepository.findUserByEmail(email)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        Order order = new Order();
-//        order.setStatus(Status.SCHEDULED);
-//        order.setCreatedAt(scheduledTime);
-//        order.setUser(user);
-//
-//        for (CreateOrderDto dto : dishOrderDtos) {
-//            Dish dish = dishRepository.findById(dto.getDishId())
-//                    .orElseThrow(() -> new EntityNotFoundException("Dish not found"));
-//            order.addDish(dish, dto.getQuantity());
-//        }
-//        orderRepository.save(order);
-//    }
 
     public List<OrderDto> searchOrders(String status, String dateFrom, String dateTo, Long userId, String authorization) {
         String email = jwtUtil.extractEmail(authorization.substring(7));

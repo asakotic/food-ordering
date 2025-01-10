@@ -7,6 +7,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,11 @@ const routes: Routes = [
     component: CreateOrderComponent,
     canActivate: [AuthGuard]
   },
-  
+  {
+    path:"error-message",
+    component: ErrorMessageComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
