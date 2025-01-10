@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <h2>Error History</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+                <th *ngIf="isAdmin">User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let error of errors">
+                <td>{{ error.id }}</td>
+                <td>{{ error.message }}</td>
+                <td>{{ error.timestamp | date: 'short' }}</td>
+                <td *ngIf="isAdmin">{{ error.userId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination mt-3">
+        <button class="btn btn-secondary" [disabled]="currentPage === 0" (click)="goToPage(currentPage - 1)">
+            Previous
+        </button>
+        <span class="mx-3">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+        <button class="btn btn-secondary" [disabled]="currentPage === totalPages - 1"
+            (click)="goToPage(currentPage + 1)">
+            Next
+        </button>
+    </div>
+</div>
