@@ -51,7 +51,7 @@ public class UserService {
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "Email is already in use");
                 });
 
-        if (!existingUser.getEmail().equals(emailFromToken)) {
+        if (!existingUser.getAdmin() && !existingUser.getEmail().equals(emailFromToken)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not allowed to update this user");
         }
 

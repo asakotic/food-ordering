@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Create New Order</h2>
-    <div class="form-group">
+    <div class="form-group" *ngIf="can_schedule">
         <label for="scheduledTime">Schedule Time (optional):</label>
         <input type="datetime-local" id="scheduledTime" class="form-control" [(ngModel)]="scheduledTime" />
     </div>

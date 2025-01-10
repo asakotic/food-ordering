@@ -35,7 +35,7 @@ public class OrderService {
         User user = userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        int activeOrders = orderRepository.countByUserAndStatusIn(user, List.of(Status.ORDERED, Status.PREPARING, Status.IN_DELIVERY));
+        int activeOrders = orderRepository.countByUserAndStatusIn(user, List.of(Status.PREPARING, Status.IN_DELIVERY));
         if (activeOrders >= 3) {
             throw new RuntimeException("User cannot have more than 3 active orders.");
         }
