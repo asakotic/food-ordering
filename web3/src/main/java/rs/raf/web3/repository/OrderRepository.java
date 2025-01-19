@@ -46,4 +46,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     @Modifying
     @Query("UPDATE Ord o SET o.active = false WHERE o.status = :status AND o.active = true")
     void deactivateOrdersByStatus(@Param("status") Status status);
+
+    List<Order> findOrdersByStatus(Status status);
 }

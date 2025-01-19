@@ -41,6 +41,8 @@ public class UserService {
     public AuthResponse updateUser(User user, String authorization) {
         String token = authorization.substring(7);
         String emailFromToken = jwtUtil.extractEmail(token);
+        User editor = userRepository.findUserByEmail(emailFromToken)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         User existingUser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
@@ -51,7 +53,7 @@ public class UserService {
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "Email is already in use");
                 });
 
-        if (!existingUser.getAdmin() && !existingUser.getEmail().equals(emailFromToken)) {
+        if (!editor.getAdmin() && !existingUser.getEmail().equals(emailFromToken)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not allowed to update this user");
         }
 
