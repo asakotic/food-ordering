@@ -54,6 +54,11 @@ public class StatusUpdate {
 
             if (userOrderedCount >= 3) {
                 errorService.saveError(new ErrorDto("Error, cannot do scheduled order bcs 3 are already in order", LocalDateTime.now(),order.getUser().getEmail()));
+                orderRepository.updateOrdersByStatusAndTime(
+                        Status.SCHEDULED,
+                        Status.CANCELED,
+                        now
+                );
             } else {
                 orderRepository.updateOrdersByStatusAndTime(
                         Status.SCHEDULED,
